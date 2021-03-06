@@ -21,8 +21,10 @@ public class BidController {
         int remain = quantity;
         while(remain>0) {
         	bid++;
+        	// first line will change bidderCash1
+        	double bidderCash1Temp = bidderCash1;
             bidderCash1 = this.bidder1.getProposedBidCash(bidderCash1, bidderCash2);
-            bidderCash2 = this.bidder2.getProposedBidCash(bidderCash2, bidderCash1);
+            bidderCash2 = this.bidder2.getProposedBidCash(bidderCash2, bidderCash1Temp);
             System.out.println(" bid  = " + bid + " bidderCash1 " + bidderCash1 + " bidderCash2 " + bidderCash2);
             remain= judgeAndGetRemain(bidderCash1, bidderCash2,remain);
         }
@@ -30,24 +32,22 @@ public class BidController {
     }
 
     private int  judgeAndGetRemain(double bidderCash1, double bidderCash2, int remain) {
+     	remain -=2;
         if (bidderCash1 > bidderCash2) {
-        	remain -=2;
         	if(remain>=0) {
         		this.bidder1.addQuanityAndDecreaseCash(2, bidderCash1);
         	}
             return remain;
         } else if (bidderCash1 < bidderCash2) {
-        	remain -=2;
         	if(remain>=0) {
-        		this.bidder2.addQuanityAndDecreaseCash(2, bidderCash1);
+        		this.bidder2.addQuanityAndDecreaseCash(2, bidderCash2);
         	}
             return remain;
         } else {
             //equal case
-        	remain -=1;
         	if(remain>=0) {
         		this.bidder1.addQuanityAndDecreaseCash(1, bidderCash1);
-        		this.bidder1.addQuanityAndDecreaseCash(1, bidderCash2);
+        		this.bidder2.addQuanityAndDecreaseCash(1, bidderCash2);
         	}
             return remain;
         }

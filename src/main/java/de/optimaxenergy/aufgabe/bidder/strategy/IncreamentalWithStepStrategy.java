@@ -27,8 +27,8 @@ public class IncreamentalWithStepStrategy implements BidStrategy {
             return lastCompatitorBid + this.effectiveStep;
         }
         // reset the effectiveStep to basestep because this bidder wins the last bid
-        this.effectiveStep = this.baseStep;
-        return lastBid + this.baseStep;
+        //this.effectiveStep = this.baseStep;
+        return lastBid + this.effectiveStep;
     }
 
 }
