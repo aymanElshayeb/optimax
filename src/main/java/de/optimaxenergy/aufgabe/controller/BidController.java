@@ -17,24 +17,39 @@ public class BidController {
     public void run() {
         double bidderCash1 = -1;
         double bidderCash2 = -1;
-        for (int i = 0; i < quantity; i += 2) {
+        int bid = 0;
+        int remain = quantity;
+        while(remain>0) {
+        	bid++;
             bidderCash1 = this.bidder1.getProposedBidCash(bidderCash1, bidderCash2);
             bidderCash2 = this.bidder2.getProposedBidCash(bidderCash2, bidderCash1);
-            System.out.println(" bid  = " + i + " bidderCash1 " + bidderCash1 + " bidderCash2 " + bidderCash2);
-            judge(bidderCash1, bidderCash2);
+            System.out.println(" bid  = " + bid + " bidderCash1 " + bidderCash1 + " bidderCash2 " + bidderCash2);
+            remain= judgeAndGetRemain(bidderCash1, bidderCash2,remain);
         }
 
     }
 
-    private void judge(double bidderCash1, double bidderCash2) {
+    private int  judgeAndGetRemain(double bidderCash1, double bidderCash2, int remain) {
         if (bidderCash1 > bidderCash2) {
-            this.bidder1.addQuanityAndDecreaseCash(2, bidderCash1);
+        	remain -=2;
+        	if(remain>=0) {
+        		this.bidder1.addQuanityAndDecreaseCash(2, bidderCash1);
+        	}
+            return remain;
         } else if (bidderCash1 < bidderCash2) {
-            this.bidder2.addQuanityAndDecreaseCash(2, bidderCash2);
+        	remain -=2;
+        	if(remain>=0) {
+        		this.bidder2.addQuanityAndDecreaseCash(2, bidderCash1);
+        	}
+            return remain;
         } else {
             //equal case
-            this.bidder1.addQuanityAndDecreaseCash(1, bidderCash1);
-            this.bidder2.addQuanityAndDecreaseCash(1, bidderCash2);
+        	remain -=1;
+        	if(remain>=0) {
+        		this.bidder1.addQuanityAndDecreaseCash(1, bidderCash1);
+        		this.bidder1.addQuanityAndDecreaseCash(1, bidderCash2);
+        	}
+            return remain;
         }
     }
 }
