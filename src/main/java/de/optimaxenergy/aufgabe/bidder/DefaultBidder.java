@@ -2,6 +2,9 @@ package de.optimaxenergy.aufgabe.bidder;
 
 import de.optimaxenergy.aufgabe.bidder.strategy.BidStrategy;
 
+/**
+ * This class contains the main implementation of the bidder
+ */
 public class DefaultBidder implements Bidder {
     private final BidStrategy bidStrategy;
     private int quantity;
@@ -32,12 +35,12 @@ public class DefaultBidder implements Bidder {
         this.currentCash -= cash;
     }
 
-    public int getQuantity(){
-        return  this.quantity;
+    public int getQuantity() {
+        return this.quantity;
     }
 
-    public double getCash(){
-        return  this.currentCash;
+    public double getCash() {
+        return this.currentCash;
     }
 
     public void printStatus() {

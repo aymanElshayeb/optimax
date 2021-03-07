@@ -1,5 +1,8 @@
 package de.optimaxenergy.aufgabe.bidder.strategy;
 
+/**
+ * This class starts with base value to bid then this value increased each time bidder fails to win.
+ */
 public class IncreamentalWithStepStrategy implements BidStrategy {
 
     private final double baseStep;
@@ -20,14 +23,13 @@ public class IncreamentalWithStepStrategy implements BidStrategy {
         if (lastCompatitorBid == 0) {
             return 0.1d;
         }
-        
-        // if bidder loses last bid increase the step
+
+        // if compatitor wins increase the step to win the value
         if (lastCompatitorBid >= lastBid) {
             this.effectiveStep = this.effectiveStep + baseStep;
             return lastCompatitorBid + this.effectiveStep;
         }
-        // reset the effectiveStep to basestep because this bidder wins the last bid
-        //this.effectiveStep = this.baseStep;
+
         return lastBid + this.effectiveStep;
     }
 
