@@ -22,7 +22,7 @@ public class HalfRoundsStrategy implements BidStrategy {
 
     @Override
     public double getProposedBidCash(double lastBid, double lastCompatitorBid) {
-        //lastCompatitorBid == 0 means compatitor loses his money and we can now bid with least cash
+        //compatitorCurrentCash is equals small value  means competitor loses his money and we can now bid with least cash
         if (compatitorCurrentCash < 0.1d) {
             return 0.1d;
         }

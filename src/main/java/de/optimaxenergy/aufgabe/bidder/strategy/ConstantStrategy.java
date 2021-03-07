@@ -1,7 +1,7 @@
 package de.optimaxenergy.aufgabe.bidder.strategy;
 
 /**
- * Constant strategy allows return back constant number until the end of chash.
+ * Constant strategy  returns back constant number until the end of chash.
  * if compatitor cash is ended up , the returned bid will be minimum
  */
 public class ConstantStrategy implements BidStrategy {
